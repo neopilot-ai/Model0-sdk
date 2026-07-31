@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createClient } from '../../../../src/sdk/v0'
+import { createClient } from '../../../../src/sdk/model0'
 import * as core from '../../../../src/sdk/core'
 
 // Mock the core module

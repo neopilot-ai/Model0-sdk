@@ -125,8 +125,8 @@ export function createClient(config: V0ClientConfig = {}) {
 // Default client for backward compatibility
 export const v0 = createClient()`
 
-  fs.writeFileSync(path.join(outputPath, 'v0.ts'), sdk)
-  console.log(`SDK written to ${outputPath}/v0.ts`)
+  fs.writeFileSync(path.join(outputPath, 'model0.ts'), sdk)
+  console.log(`SDK written to ${outputPath}/model0.ts`)
 
   // Generate index.ts with all exports
   generateIndexFile(
@@ -962,7 +962,7 @@ function generateIndexFile(
   type V0ClientConfig,
   parseStreamingResponse,
   type StreamEvent,
-} from './sdk/v0'
+} from './sdk/model0'
 
 // Export all schema types
 export type {
@@ -981,7 +981,7 @@ ${responseTypes.map((type) => `  ${type},`).join('\n')}${
 ${otherTypes.map((type) => `  ${type},`).join('\n')}`
       : ''
   }
-} from './sdk/v0'
+} from './sdk/model0'
 `
 
   // Write to src/index.ts (go up one level from outputPath)

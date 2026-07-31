@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { createClient, v0, type V0ClientConfig } from '../src/sdk/v0'
+import { createClient, v0, type V0ClientConfig } from '../src/sdk/model0'
 import * as core from '../src/sdk/core'
 
 // Mock the createFetcher function

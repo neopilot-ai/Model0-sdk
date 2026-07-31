@@ -4,7 +4,7 @@ export {
   type V0ClientConfig,
   parseStreamingResponse,
   type StreamEvent,
-} from './sdk/v0'
+} from './sdk/model0'
 
 // Export all schema types
 export type {
@@ -145,4 +145,4 @@ export type {
   UserPreferencesPostResponseSchema,
   UserPreferencesResponseSchema,
   UserPreferencesSchema,
-} from './sdk/v0'
+} from './sdk/model0'
