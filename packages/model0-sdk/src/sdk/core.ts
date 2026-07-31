@@ -73,6 +73,11 @@ export function createFetcher(config: ClientConfig = {}) {
       return res.arrayBuffer()
     }
 
+    // Handle Server-Sent Events responses
+    if (contentType.includes('text/event-stream')) {
+      return res.text()
+    }
+
     return res.json()
   }
 }

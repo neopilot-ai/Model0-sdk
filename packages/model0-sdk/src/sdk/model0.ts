@@ -1018,6 +1018,8 @@ export interface ChatsDeleteVersionFilesRequest {
 
 export type ChatsDeleteVersionFilesResponse = VersionDetail
 
+export type ChatsResumeResponse = string
+
 export interface ChatsStopResponse {
   success: true
 }
@@ -1939,7 +1941,7 @@ export function createClient(config: V0ClientConfig = {}) {
       async resume(params: {
         chatId: string
         messageId: string
-      }): Promise<any> {
+      }): Promise<ChatsResumeResponse> {
         const pathParams = {
           chatId: params.chatId,
           messageId: params.messageId,

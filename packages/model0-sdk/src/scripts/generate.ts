@@ -291,6 +291,11 @@ function extractResponseSchema(responses?: any): any {
     return { type: 'binary', format: 'arrayBuffer' }
   }
 
+  // Handle Server-Sent Events responses
+  if (content['text/event-stream']) {
+    return content['text/event-stream'].schema || { type: 'string' }
+  }
+
   // Default to JSON response
   if (content['application/json']?.schema) {
     return content['application/json'].schema
