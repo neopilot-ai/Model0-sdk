@@ -38,7 +38,8 @@ export async function POST(request: NextRequest) {
         try {
           // Get project details to use as the Vercel project name
           const project = await v0.projects.getById({ projectId })
-          const vercelProjectName = project.name || `model0-project-${projectId}`
+          const vercelProjectName =
+            project.name || `model0-project-${projectId}`
 
           await v0.integrations.vercel.projects.create({
             projectId,

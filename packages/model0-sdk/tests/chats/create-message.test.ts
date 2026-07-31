@@ -105,7 +105,11 @@ describe('v0.chats.sendMessage', () => {
   })
 
   it('should handle different model configurations', async () => {
-    const modelIds = ['model0-1.5-sm', 'model0-1.5-md', 'model0-1.5-lg'] as const
+    const modelIds = [
+      'model0-1.5-sm',
+      'model0-1.5-md',
+      'model0-1.5-lg',
+    ] as const
 
     for (const modelId of modelIds) {
       mockFetcher.mockResolvedValue({

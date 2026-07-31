@@ -749,7 +749,12 @@ export interface ChatsCreateRequest {
   chatPrivacy?: 'public' | 'private' | 'team-edit' | 'team' | 'unlisted'
   projectId?: string
   modelConfiguration?: {
-    modelId?: 'model0-auto' | 'model0-mini' | 'model0-pro' | 'model0-max' | 'model0-max-fast'
+    modelId?:
+      | 'model0-auto'
+      | 'model0-mini'
+      | 'model0-pro'
+      | 'model0-max'
+      | 'model0-max-fast'
     imageGenerations?: boolean
     thinking?: boolean
   }
@@ -896,7 +901,12 @@ export interface ChatsSendMessageRequest {
   }[]
   system?: string
   modelConfiguration?: {
-    modelId?: 'model0-auto' | 'model0-mini' | 'model0-pro' | 'model0-max' | 'model0-max-fast'
+    modelId?:
+      | 'model0-auto'
+      | 'model0-mini'
+      | 'model0-pro'
+      | 'model0-max'
+      | 'model0-max-fast'
     imageGenerations?: boolean
     thinking?: boolean
   }
@@ -1048,7 +1058,12 @@ export interface ChatsResolveTaskRequest {
       }
   responseMode?: 'sync' | 'async' | 'experimental_stream'
   modelConfiguration?: {
-    modelId?: 'model0-auto' | 'model0-mini' | 'model0-pro' | 'model0-max' | 'model0-max-fast'
+    modelId?:
+      | 'model0-auto'
+      | 'model0-mini'
+      | 'model0-pro'
+      | 'model0-max'
+      | 'model0-max-fast'
     imageGenerations?: boolean
     thinking?: boolean
   }

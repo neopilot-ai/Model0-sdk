@@ -29,8 +29,8 @@ export default function ApiKeyError() {
 
         {/* Description */}
         <p className="text-gray-600 mb-6 leading-relaxed">
-          To use this app, you need to configure your model0 API key. You can get
-          one from v0.dev and set it as an environment variable.
+          To use this app, you need to configure your model0 API key. You can
+          get one from v0.dev and set it as an environment variable.
         </p>
 
         {/* Instructions */}

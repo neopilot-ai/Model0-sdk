@@ -127,8 +127,8 @@ classic/
 
 ## Environment Variables
 
-| Variable     | Description                        | Required |
-| ------------ | ---------------------------------- | -------- |
+| Variable     | Description                            | Required |
+| ------------ | -------------------------------------- | -------- |
 | `V0_API_KEY` | Your model0 API key for authentication | Yes      |
 
 ## Scripts

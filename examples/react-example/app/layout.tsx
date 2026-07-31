@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: '@model0-sdk/react Example',
-  description: 'Example Next.js application demonstrating @model0-sdk/react usage',
+  description:
+    'Example Next.js application demonstrating @model0-sdk/react usage',
 }
 
 export default function RootLayout({

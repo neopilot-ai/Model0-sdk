@@ -117,7 +117,7 @@ When the rate limit is exceeded, users receive a 429 status code with informatio
 
 | Variable            | Required | Description                                                                             |
 | ------------------- | -------- | --------------------------------------------------------------------------------------- |
-| `V0_API_KEY`        | Yes      | Your model0 Platform API key from [v0.dev/settings](https://v0.dev/settings)                |
+| `V0_API_KEY`        | Yes      | Your model0 Platform API key from [v0.dev/settings](https://v0.dev/settings)            |
 | `KV_REST_API_URL`   | No       | Upstash Redis REST URL for rate limiting (if not provided, rate limiting is disabled)   |
 | `KV_REST_API_TOKEN` | No       | Upstash Redis REST token for rate limiting (if not provided, rate limiting is disabled) |
 
