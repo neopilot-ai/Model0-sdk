@@ -26,7 +26,7 @@
     "build": "bunchee",
     "clean": "rm -rf dist *.tsbuildinfo",
     "sdk:generate": "tsx src/scripts/generate.ts && pnpm format",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest"
