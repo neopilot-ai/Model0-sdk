@@ -9,25 +9,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
+          cache: "pnpm"
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Run tests
-        run: npm run test
+        run: pnpm run test
 
       - name: Compile TypeScript
-        run: npm run compile
+        run: pnpm run compile
 
       - name: Publish to VS Code Marketplace
-        run: npm run publish -- -p $AZURE_TOKEN
+        run: pnpm run publish -- -p $AZURE_TOKEN
         env:
           AZURE_TOKEN: ${{ secrets.AZURE_TOKEN }}
