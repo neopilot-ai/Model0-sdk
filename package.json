@@ -1,0 +1,70 @@
+{
+	"name": "vscode-model0-model-preview",
+	"publisher": "NeoPilot",
+	"displayName": "Model0 for VS Code Chat (Preview)",
+	"description": "VS Code extension that provides v0 language models for GitHub Copilot chat via the Language Model Chat Provider API. (Preview Version)",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/neopilot-ai/model0"
+	},
+	"version": "0.1.0-preview.0",
+	"engines": {
+		"vscode": "^1.104.0-20250828"
+	},
+	"categories": [
+		"AI",
+		"Chat"
+	],
+	"contributes": {
+		"languageModelChatProviders": [
+			{
+				"vendor": "v0",
+				"displayName": "v0",
+				"managementCommand": "v0.manage"
+			}
+		],
+		"commands": [
+			{
+				"command": "v0.manage",
+				"title": "Manage model0 API Key"
+			}
+		]
+	},
+	"main": "./out/extension.js",
+	"scripts": {
+		"vscode:prepublish": "pnpm run compile",
+		"download-api": "dts dev",
+		"postdownload-api": "dts main",
+		"compile": "tsc -p ./",
+		"lint": "eslint",
+		"format": "prettier --write \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"package": "vsce package",
+		"publish": "vsce publish"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.13.0",
+		"@stylistic/eslint-plugin": "^2.9.0",
+		"@types/node": "^22",
+		"@types/vscode": "^1.103.0",
+		"@vscode/dts": "^0.4.1",
+		"@vscode/vsce": "^3.6.0",
+		"eslint": "^9.13.0",
+		"prettier": "^3.6.2",
+		"typescript": "^5.9.2",
+		"typescript-eslint": "^8.39.0",
+		"vitest": "^4.1.9"
+	},
+	"prettier": {
+		"semi": true,
+		"singleQuote": true,
+		"trailingComma": "none",
+		"useTabs": true
+	},
+	"allowScripts": {
+		"@vscode/vsce-sign@2.0.6": true,
+		"keytar@7.9.0": true
+	}
+}

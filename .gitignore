@@ -1,0 +1,8 @@
+out
+dist
+node_modules
+.vscode-test/
+*.vsix
+__MACOSX
+windsurf-dev-containers
+model0-sdk

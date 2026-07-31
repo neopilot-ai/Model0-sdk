@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"module": "Node16",
+		"target": "ES2022",
+		"lib": [
+			"ES2022",
+			"DOM"
+		],
+		"sourceMap": true,
+		"rootDir": "src",
+		"strict": true,
+		"outDir": "out",
+		"skipLibCheck": true /* Skip type checking of declaration files */,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedParameters": true
+	},
+	"include": [
+		"src",
+		"vscode.d.ts"
+	],
+	"exclude": [
+		"vitest.config.ts",
+		"src/**/*.test.ts"
+	]
+}
