@@ -5,4 +5,3 @@ node_modules
 *.vsix
 __MACOSX
 windsurf-dev-containers
-model0-sdk
