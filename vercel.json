@@ -1,0 +1,49 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/playground/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=playground build"
+      }
+    },
+    {
+      "src": "examples/classic/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=classic build"
+      }
+    },
+    {
+      "src": "examples/model0-clone/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=model0-clone build"
+      }
+    },
+    {
+      "src": "examples/react-example/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=react-example build"
+      }
+    },
+    {
+      "src": "examples/simple/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=simple build"
+      }
+    }
+  ],
+  "routes": [
+    { "src": "/playground(/.*)?", "dest": "/apps/playground$1" },
+    { "src": "/classic(/.*)?", "dest": "/examples/classic$1" },
+    { "src": "/model0-clone(/.*)?", "dest": "/examples/model0-clone$1" },
+    { "src": "/react-example(/.*)?", "dest": "/examples/react-example$1" },
+    { "src": "/simple(/.*)?", "dest": "/examples/simple$1" },
+    { "src": "/", "dest": "/apps/playground" }
+  ]
+}
