@@ -46,6 +46,8 @@ jspm_packages/
 *.js.map
 !.github/workflows/actions/verify-changesets/index.js
 !examples/react-example/tailwind.config.js
+!scripts/bundle-analyzer.js
+!scripts/coverage-merge.js
 
 # Optional npm cache directory
 .npm
@@ -84,6 +86,10 @@ jspm_packages/
 
 # Turbo
 .turbo
+
+# CI report artifacts
+.bundle-report.json
+.coverage/
 
 # Husky
 .husky/_

@@ -1,19 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
-  "hashAlgorithm": "sha256",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**"],
       "cache": true,
-      "cacheOnlyWriteWhenUsed": true,
       "env": ["NODE_ENV"]
     },
     "test": {
       "dependsOn": ["^build", "build"],
       "cache": true,
-      "cacheOnlyWriteWhenUsed": true,
       "outputs": ["coverage/**"]
     },
     "test:watch": {
