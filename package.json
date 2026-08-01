@@ -13,7 +13,7 @@
     "build:packages": "turbo build --filter=@model0-sdk/* --filter=model0-sdk",
     "dev": "turbo dev",
     "lint": "turbo lint --filter=@model0-sdk/* --filter=model0-sdk --filter=create-model0-sdk-app",
-    "test": "turbo test --filter=@model0-sdk/* --filter=model0-sdk",
+    "test": "turbo test --filter=@model0-sdk/* --filter=model0-sdk --",
     "test:watch": "turbo test:watch",
     "type-check": "turbo type-check --filter=@model0-sdk/* --filter=model0-sdk --filter=create-model0-sdk-app",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
