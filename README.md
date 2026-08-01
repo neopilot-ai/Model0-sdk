@@ -138,6 +138,7 @@ This project uses [Changesets](https://github.com/changesets/changesets) for aut
 The project includes comprehensive GitHub Actions workflows:
 
 **Continuous Integration** (runs on all PRs and pushes to main):
+
 - **CI Pipeline** (`ci.yml`): Build, test, lint, format check
   - Builds all packages with bundle size analysis
   - Runs tests on Node.js 20 and 22
@@ -169,12 +170,14 @@ The project includes comprehensive GitHub Actions workflows:
   - Comments metrics on PRs
 
 **Deployment** (runs on successful main builds):
+
 - **Deploy** (`deploy.yml`): Automated Vercel deployment
   - Deploys all apps to Vercel automatically
   - Creates deployment status checks
   - Links preview URLs in comments
 
 **Scheduled**:
+
 - **Release Pipeline** (`release.yml`): Automated npm publishing
   - Creates "Version Packages" PRs when changesets are added
   - Publishes packages to npm when version PRs are merged
@@ -191,6 +194,7 @@ The project includes comprehensive GitHub Actions workflows:
 ### Documentation
 
 Comprehensive guides for contributors and users:
+
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Monorepo structure, workspace dependencies, and design
 - **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Vercel deployment, environment setup, troubleshooting
 - **[TESTING.md](./TESTING.md)**: Test strategy, coverage requirements, writing tests

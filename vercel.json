@@ -9,11 +9,7 @@
     "TURBO_TEAM": "@vercel-build",
     "TURBO_TELEMETRY_DISABLED": "1"
   },
-  "envPrefix": [
-    "NEXT_PUBLIC_",
-    "MODEL0_",
-    "DATABASE_"
-  ],
+  "envPrefix": ["NEXT_PUBLIC_", "MODEL0_", "DATABASE_"],
   "builds": [
     {
       "src": "apps/playground/package.json",

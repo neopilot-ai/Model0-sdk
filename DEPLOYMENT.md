@@ -24,14 +24,14 @@ Accessible at: model0-sdk.vercel.app/{app-path}
 
 All apps are deployed under a single Vercel project:
 
-| App | URL |
-|-----|-----|
-| Playground | `https://model0-sdk.vercel.app/playground` |
-| Classic Example | `https://model0-sdk.vercel.app/classic` |
-| Model0 Clone | `https://model0-sdk.vercel.app/model0-clone` |
-| React Example | `https://model0-sdk.vercel.app/react-example` |
-| Simple Example | `https://model0-sdk.vercel.app/simple` |
-| Root | `https://model0-sdk.vercel.app` → redirects to /playground |
+| App             | URL                                                        |
+| --------------- | ---------------------------------------------------------- |
+| Playground      | `https://model0-sdk.vercel.app/playground`                 |
+| Classic Example | `https://model0-sdk.vercel.app/classic`                    |
+| Model0 Clone    | `https://model0-sdk.vercel.app/model0-clone`               |
+| React Example   | `https://model0-sdk.vercel.app/react-example`              |
+| Simple Example  | `https://model0-sdk.vercel.app/simple`                     |
+| Root            | `https://model0-sdk.vercel.app` → redirects to /playground |
 
 ### Preview URLs (Pull Requests)
 
@@ -46,7 +46,7 @@ https://model0-sdk-[branch-name].vercel.app/playground
 1. **Vercel Account**: Free or Pro plan
 2. **GitHub Account**: Connected to Vercel
 3. **Environment Variables**: Set in Vercel dashboard
-4. **Permissions**: 
+4. **Permissions**:
    - Admin access to GitHub repo
    - Vercel project owner/admin
 
@@ -79,17 +79,20 @@ In Vercel Dashboard (vercel.com):
 Add variables in Vercel Dashboard > Settings > Environment Variables:
 
 **All Environments**:
+
 ```
 NODE_ENV=production
 ```
 
 **Production**:
+
 ```
 NEXT_PUBLIC_API_URL=https://api.model0.dev
 MODEL0_API_KEY=[secret-key]
 ```
 
 **Preview**:
+
 ```
 NEXT_PUBLIC_API_URL=https://api-staging.model0.dev
 MODEL0_API_KEY=[staging-key]
@@ -100,6 +103,7 @@ MODEL0_API_KEY=[staging-key]
 Vercel automatically uses `vercel.json` for build configuration.
 
 **Build Command**: Configured per-app in `vercel.json`
+
 ```bash
 cd ../.. && pnpm build:packages && pnpm --filter=<app> build
 ```
@@ -113,6 +117,7 @@ cd ../.. && pnpm build:packages && pnpm --filter=<app> build
 **Trigger**: Push to `main` branch
 
 **Process**:
+
 1. GitHub Actions runs CI checks
 2. If all checks pass → Vercel builds
 3. Each app builds independently
@@ -125,12 +130,14 @@ cd ../.. && pnpm build:packages && pnpm --filter=<app> build
 **Trigger**: Open PR with changes
 
 **Process**:
+
 1. GitHub Actions runs CI checks
 2. If checks pass → Vercel builds preview
 3. Unique URL generated for testing
 4. Bot comments preview URLs on PR
 
 **Example PR Comment**:
+
 ```
 🚀 Preview URLs:
 - Playground: https://model0-sdk-branch-name.vercel.app/playground
@@ -155,6 +162,7 @@ vercel rollback
 ### Caching Strategy
 
 Vercel caches:
+
 - **pnpm cache**: `~/.pnpm-store` (across deploys)
 - **Next.js cache**: `.next` (incremental builds)
 - **Turbo cache**: Remote cache (via Vercel integration)
@@ -165,9 +173,11 @@ Vercel caches:
 ### Reducing Build Time
 
 1. **Enable Turbo Remote Caching**:
+
    ```bash
    vercel link
    ```
+
    Automatically enables caching when linked.
 
 2. **Parallelize Tasks**:
@@ -215,12 +225,14 @@ vercel inspect <deployment-url>
 ### Securely Set Secrets
 
 **In Vercel Dashboard**:
+
 1. Settings → Environment Variables
 2. Add key-value pair
 3. Select environments (Production, Preview, Development)
 4. Click "Save"
 
 **In CI/CD** (GitHub Actions):
+
 1. Settings → Secrets and variables → Actions
 2. Add secret (e.g., `VERCEL_TOKEN`)
 3. Use in workflow: `${{ secrets.VERCEL_TOKEN }}`
@@ -242,6 +254,7 @@ vercel env push
 **Common Issues**:
 
 1. **Missing Dependencies**
+
    ```bash
    # Ensure lock file is committed
    git add pnpm-lock.yaml
@@ -272,12 +285,14 @@ vercel env push
 
 ### Slow Deployments
 
-1. **Check cache hit rate**: 
+1. **Check cache hit rate**:
+
    ```bash
    vercel env pull
    ```
 
 2. **Profile build**:
+
    ```bash
    vercel build --debug
    ```
@@ -296,6 +311,7 @@ vercel env push
 ### Web Vitals
 
 Vercel automatically tracks:
+
 - **LCP** (Largest Contentful Paint)
 - **FID** (First Input Delay)
 - **CLS** (Cumulative Layout Shift)
@@ -306,6 +322,7 @@ View in: Vercel Dashboard > Analytics
 ### Build Analytics
 
 Track in Vercel Dashboard:
+
 - Build duration trends
 - Cache effectiveness
 - Function execution time
@@ -323,6 +340,7 @@ Track in Vercel Dashboard:
 ### Edge Middleware
 
 Create `middleware.ts` in root:
+
 ```typescript
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
@@ -340,6 +358,7 @@ export const config = {
 ### Serverless Functions
 
 API routes automatically become serverless functions:
+
 ```typescript
 // pages/api/hello.ts
 export default async function handler(req, res) {
@@ -361,6 +380,7 @@ vercel rollback <deployment-url>
 ### Automatic Rollback
 
 GitHub → Vercel integration handles:
+
 - Automatic rollback on failed builds
 - 48-hour retention of old deployments
 - Can manually pin specific version
@@ -370,11 +390,13 @@ GitHub → Vercel integration handles:
 ### GitHub Actions Workflows
 
 **Automatic on Push to Main**:
+
 1. `.github/workflows/ci.yml` - Tests pass
 2. `.github/workflows/deploy.yml` - Deploy to Vercel
 3. `.github/workflows/performance.yml` - Monitor performance
 
 **Automatic on Pull Request**:
+
 1. `.github/workflows/ci.yml` - Validate changes
 2. Vercel bot comments preview URLs
 

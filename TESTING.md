@@ -62,6 +62,7 @@ Generates coverage reports in `coverage/` directory.
 ### Coverage Thresholds
 
 Enforced per package (in `vitest.config.ts`):
+
 - **Lines**: 60%
 - **Functions**: 60%
 - **Branches**: 60%
@@ -144,6 +145,7 @@ afterEach(() => {
 ### GitHub Actions Workflow
 
 Tests run automatically:
+
 - **On PR**: `pnpm test` (Node 20 & 22)
 - **Before merge**: All checks must pass
 - **On main**: Post-deploy validation
@@ -151,6 +153,7 @@ Tests run automatically:
 ### Coverage Reporting
 
 Coverage reports are:
+
 1. Generated during test run
 2. Merged into `.coverage/` directory
 3. Reported as GitHub PR comment
@@ -159,6 +162,7 @@ Coverage reports are:
 ### Test Node Versions
 
 Tests run on multiple Node versions:
+
 - **Node 20** (LTS)
 - **Node 22** (Latest)
 
@@ -171,10 +175,15 @@ Ensures compatibility across versions.
 Default timeout: **10,000ms per test**
 
 Extend for slow tests:
+
 ```typescript
-it('slow operation', async () => {
-  // test code
-}, { timeout: 30000 })
+it(
+  'slow operation',
+  async () => {
+    // test code
+  },
+  { timeout: 30000 },
+)
 ```
 
 ### Test Parallelization
@@ -182,6 +191,7 @@ it('slow operation', async () => {
 Tests run in parallel by default.
 
 For sequential tests (if needed):
+
 ```typescript
 describe.sequential('API Tests', () => {
   // Tests run one after another
@@ -191,10 +201,14 @@ describe.sequential('API Tests', () => {
 ### Optimize Coverage
 
 ```typescript
-it('should work', () => {
-  const result = myFunction()
-  expect(result).toBeDefined()
-}, { skip: true }) // Skip expensive tests in CI
+it(
+  'should work',
+  () => {
+    const result = myFunction()
+    expect(result).toBeDefined()
+  },
+  { skip: true },
+) // Skip expensive tests in CI
 ```
 
 ## Debugging Tests
@@ -211,6 +225,7 @@ pnpm test:watch -- <test-file.test.ts>
 ### Debug in VS Code
 
 Add `.vscode/launch.json`:
+
 ```json
 {
   "type": "node",
@@ -235,6 +250,7 @@ pnpm test -- --reporter=verbose
 ### 1. Test Behavior, Not Implementation
 
 ❌ Bad:
+
 ```typescript
 it('calls setState', () => {
   const setState = vi.fn()
@@ -243,6 +259,7 @@ it('calls setState', () => {
 ```
 
 ✅ Good:
+
 ```typescript
 it('updates display when data changes', () => {
   // test user-visible behavior
@@ -252,18 +269,21 @@ it('updates display when data changes', () => {
 ### 2. Use Descriptive Names
 
 ❌ Bad:
+
 ```typescript
-it('works', () => { })
+it('works', () => {})
 ```
 
 ✅ Good:
+
 ```typescript
-it('should throw error when ID is empty', () => { })
+it('should throw error when ID is empty', () => {})
 ```
 
 ### 3. One Assertion Per Test
 
 ❌ Bad:
+
 ```typescript
 it('validates input', () => {
   expect(validate('abc')).toBe(true)
@@ -273,11 +293,12 @@ it('validates input', () => {
 ```
 
 ✅ Good:
+
 ```typescript
 describe('validate', () => {
-  it('should accept alphabetic input', () => { })
-  it('should reject numeric input', () => { })
-  it('should throw on empty input', () => { })
+  it('should accept alphabetic input', () => {})
+  it('should reject numeric input', () => {})
+  it('should throw on empty input', () => {})
 })
 ```
 
@@ -292,9 +313,9 @@ describe('validate', () => {
 
 ```typescript
 describe('myFunction', () => {
-  it('should succeed with valid input', () => { })
-  it('should throw with invalid input', () => { })
-  it('should handle network errors', () => { })
+  it('should succeed with valid input', () => {})
+  it('should throw with invalid input', () => {})
+  it('should handle network errors', () => {})
 })
 ```
 
@@ -307,12 +328,12 @@ describe('myFunction', () => {
 export const mockUser = {
   id: '123',
   name: 'John Doe',
-  email: 'john@example.com'
+  email: 'john@example.com',
 }
 
 export const mockApiResponse = {
   status: 'success',
-  data: [mockUser]
+  data: [mockUser],
 }
 ```
 
@@ -400,6 +421,7 @@ pnpm --filter=simple exec playwright test
 ### View Historical Coverage
 
 Coverage reports are stored in GitHub artifacts:
+
 1. Go to GitHub Actions
 2. Select workflow run
 3. Download "coverage-reports" artifact
@@ -435,10 +457,15 @@ open packages/*/coverage/index.html
 ### Tests Timeout
 
 Increase timeout in test:
+
 ```typescript
-it('slow test', async () => {
-  // code
-}, { timeout: 60000 })
+it(
+  'slow test',
+  async () => {
+    // code
+  },
+  { timeout: 60000 },
+)
 ```
 
 ## Resources

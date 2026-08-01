@@ -81,11 +81,7 @@ Key settings in `turbo.json`:
       "env": ["NODE_ENV"]
     }
   },
-  "globalDependencies": [
-    ".env",
-    "tsconfig.json",
-    "eslint.config.mjs"
-  ]
+  "globalDependencies": [".env", "tsconfig.json", "eslint.config.mjs"]
 }
 ```
 
@@ -185,6 +181,7 @@ function MyApp({ Component, pageProps }) {
 ```
 
 **Targets**:
+
 - LCP (Largest Contentful Paint): < 2.5s
 - FID (First Input Delay): < 100ms
 - CLS (Cumulative Layout Shift): < 0.1
@@ -210,6 +207,7 @@ export function MyImage() {
 ```
 
 **Benefits**:
+
 - Automatic format selection
 - Responsive sizing
 - Lazy loading by default

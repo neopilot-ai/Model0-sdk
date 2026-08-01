@@ -23,6 +23,7 @@ model0-sdk/
 Published to npm and used by other packages and examples.
 
 #### `@model0-sdk/model0-sdk`
+
 - **Purpose**: Core SDK for Model0 API interactions
 - **Language**: TypeScript
 - **Exports**: Main SDK client, types, utilities
@@ -31,6 +32,7 @@ Published to npm and used by other packages and examples.
 - **Build Output**: `packages/model0-sdk/dist`
 
 #### `@model0-sdk/react`
+
 - **Purpose**: React hooks and components for SDK integration
 - **Language**: TypeScript
 - **Exports**: React hooks, context providers, components
@@ -38,12 +40,14 @@ Published to npm and used by other packages and examples.
 - **Location**: `packages/react/src`
 
 #### `@model0-sdk/ai-tools`
+
 - **Purpose**: AI tool integration utilities
 - **Language**: TypeScript
 - **Exports**: Tool definitions, execution helpers
 - **Location**: `packages/ai-tools/src`
 
 #### `create-model0-sdk-app`
+
 - **Purpose**: CLI tool for scaffolding new projects
 - **Type**: Executable package
 - **Language**: TypeScript
@@ -54,6 +58,7 @@ Published to npm and used by other packages and examples.
 Full applications deployed to Vercel.
 
 #### Playground (`apps/playground`)
+
 - **Type**: Next.js application
 - **Purpose**: Main demo and testing ground
 - **URL**: `/playground`
@@ -71,6 +76,7 @@ Reference implementations showcasing SDK usage.
 - **ai-tools-example**: AI tools integration example
 
 Each example is:
+
 - A standalone Next.js app
 - Deployed to Vercel with its own URL
 - Built with: `pnpm build:packages && pnpm --filter=<example> build`
@@ -107,15 +113,17 @@ format:        no dependencies
 ### Caching Strategy
 
 **Root-level cache** (`turbo.json` > `globalDependencies`):
+
 - `.env` files
 - `tsconfig.json`
 - `eslint.config.mjs`
 - `.prettierrc`
 
 **Per-task caching**:
+
 - `build`: Cached based on source + dependencies
 - `test`: Cached with coverage output
-- `lint`: Cached 
+- `lint`: Cached
 - Remote cache: Use Turbo's remote cache (configured via Vercel dashboard)
 
 ## Dependency Management
@@ -149,6 +157,7 @@ Specified via `pnpm` workspace protocol:
 ### TypeScript Configuration
 
 Root `tsconfig.json` enforces:
+
 - `strict: true` - All strict type checks enabled
 - `noImplicitAny: true` - No implicit any types
 - `esModuleInterop: true` - CommonJS/ESM compatibility
@@ -214,6 +223,7 @@ pnpm test      # Run tests with coverage
 ### Build Process on Vercel
 
 Each app build:
+
 1. Installs dependencies: `pnpm install --frozen-lockfile`
 2. Builds packages: `pnpm build:packages`
 3. Builds specific app: `pnpm --filter=<app> build`
@@ -222,6 +232,7 @@ Each app build:
 ### Environment Variables
 
 Configure per-app via Vercel dashboard:
+
 - API keys (Model0, third-party services)
 - Database URLs
 - Feature flags
@@ -243,6 +254,7 @@ Configure per-app via Vercel dashboard:
 ### PR Checks
 
 Before merge to `main`, must pass:
+
 - ✅ Build succeeds
 - ✅ Tests pass (Node 20 & 22)
 - ✅ No linting errors
@@ -278,6 +290,7 @@ Before merge to `main`, must pass:
 ### Build Metrics
 
 Tracked in CI:
+
 - Total build time
 - Per-package build time
 - Cache hit rate

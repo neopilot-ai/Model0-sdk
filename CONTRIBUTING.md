@@ -215,6 +215,7 @@ For comprehensive testing guide, see [TESTING.md](./TESTING.md).
 We use [Vitest](https://vitest.dev/) for testing. Tests are located in the `tests/` directory within each package.
 
 **Requirements**:
+
 - Write tests for new features
 - Update tests when modifying existing functionality
 - Minimum 60% code coverage
@@ -222,6 +223,7 @@ We use [Vitest](https://vitest.dev/) for testing. Tests are located in the `test
 - Run `pnpm test` locally before pushing
 
 **Coverage**:
+
 ```bash
 # Run tests with coverage report
 pnpm test -- --coverage
