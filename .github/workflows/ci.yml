@@ -50,7 +50,23 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build packages
-        run: pnpm build
+        run: |
+          echo "::group::Build Output"
+          time pnpm build
+          echo "::endgroup::"
+
+      - name: Analyze bundle sizes
+        if: always()
+        continue-on-error: true
+        run: node scripts/bundle-analyzer.js
+
+      - name: Upload bundle report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bundle-report
+          path: .bundle-report.json
+          retention-days: 30
 
   lint:
     name: Lint

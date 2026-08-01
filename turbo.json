@@ -1,23 +1,32 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "hashAlgorithm": "sha256",
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**", ".next/**"],
+      "cache": true,
+      "cacheOnlyWriteWhenUsed": true,
+      "env": ["NODE_ENV"]
     },
     "test": {
-      "dependsOn": ["^build", "build"]
+      "dependsOn": ["^build", "build"],
+      "cache": true,
+      "cacheOnlyWriteWhenUsed": true,
+      "outputs": ["coverage/**"]
     },
     "test:watch": {
       "cache": false,
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint"],
+      "cache": true
     },
     "type-check": {
-      "dependsOn": ["^build", "build"]
+      "dependsOn": ["^build", "build"],
+      "cache": true
     },
     "dev": {
       "cache": false,
@@ -31,7 +40,17 @@
       "cache": false
     },
     "clean": {
-      "dependsOn": ["^clean"]
+      "dependsOn": ["^clean"],
+      "cache": false
     }
-  }
+  },
+  "globalDependencies": [
+    ".env",
+    ".env.local",
+    ".env.production",
+    ".env.*.local",
+    "tsconfig.json",
+    "eslint.config.mjs",
+    ".prettierrc"
+  ]
 }

@@ -1,49 +1,135 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "env": {
+    "NODE_ENV": "production",
+    "TURBO_TEAM": "@vercel-build",
+    "TURBO_TELEMETRY_DISABLED": "1"
+  },
+  "envPrefix": [
+    "NEXT_PUBLIC_",
+    "MODEL0_",
+    "DATABASE_"
+  ],
   "builds": [
     {
       "src": "apps/playground/package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=playground build"
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=playground build",
+        "serverless": true
       }
     },
     {
       "src": "examples/classic/package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=classic build"
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=classic build",
+        "serverless": true
       }
     },
     {
       "src": "examples/model0-clone/package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=model0-clone build"
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=model0-clone build",
+        "serverless": true
       }
     },
     {
       "src": "examples/react-example/package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=react-example build"
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=react-example build",
+        "serverless": true
       }
     },
     {
       "src": "examples/simple/package.json",
       "use": "@vercel/next",
       "config": {
-        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=simple build"
+        "buildCommand": "cd ../.. && pnpm build:packages && pnpm --filter=simple build",
+        "serverless": true
       }
     }
   ],
   "routes": [
-    { "src": "/playground(/.*)?", "dest": "/apps/playground$1" },
-    { "src": "/classic(/.*)?", "dest": "/examples/classic$1" },
-    { "src": "/model0-clone(/.*)?", "dest": "/examples/model0-clone$1" },
-    { "src": "/react-example(/.*)?", "dest": "/examples/react-example$1" },
-    { "src": "/simple(/.*)?", "dest": "/examples/simple$1" },
-    { "src": "/", "dest": "/apps/playground" }
+    {
+      "src": "/api/.*",
+      "headers": {
+        "Cache-Control": "no-store, must-revalidate"
+      }
+    },
+    {
+      "src": "/playground(/.*)?",
+      "dest": "/apps/playground$1",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
+      "src": "/classic(/.*)?",
+      "dest": "/examples/classic$1",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
+      "src": "/model0-clone(/.*)?",
+      "dest": "/examples/model0-clone$1",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
+      "src": "/react-example(/.*)?",
+      "dest": "/examples/react-example$1",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
+      "src": "/simple(/.*)?",
+      "dest": "/examples/simple$1",
+      "headers": {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN"
+      }
+    },
+    {
+      "src": "/.well-known/.*",
+      "status": 404
+    },
+    {
+      "src": "/.*",
+      "dest": "/apps/playground"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/:path((?!.*\\.).*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=3600"
+        }
+      ]
+    },
+    {
+      "source": "/(_next/static|public)/:path*",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
   ]
 }
