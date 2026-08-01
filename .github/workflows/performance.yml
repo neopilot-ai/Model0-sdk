@@ -1,0 +1,108 @@
+name: Performance
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  performance:
+    name: Performance Monitoring
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.0
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Measure build times
+        run: |
+          echo "# Build Performance Report" > performance-report.md
+          echo "" >> performance-report.md
+          echo "## Build Times" >> performance-report.md
+          echo "" >> performance-report.md
+          echo "### Packages" >> performance-report.md
+          echo "" >> performance-report.md
+          
+          time pnpm build 2>&1 | tee -a performance-report.md
+          
+          echo "" >> performance-report.md
+          echo "### Turbo Cache Info" >> performance-report.md
+          echo "" >> performance-report.md
+          pnpm exec turbo run build --graph performance-graph.png 2>&1 || true
+
+      - name: Upload performance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-report
+          path: |
+            performance-report.md
+            performance-graph.png
+          retention-days: 30
+
+      - name: Analyze package sizes
+        run: node scripts/bundle-analyzer.js
+
+      - name: Comment performance on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let report = '## Performance Report\n\n';
+            
+            if (fs.existsSync('performance-report.md')) {
+              const perfReport = fs.readFileSync('performance-report.md', 'utf-8');
+              report += perfReport.slice(0, 1500) + '\n\n';
+            }
+            
+            if (fs.existsSync('.bundle-report.json')) {
+              const bundleReport = JSON.parse(fs.readFileSync('.bundle-report.json', 'utf-8'));
+              report += '### Bundle Analysis\n\n';
+              report += `**Total Size**: ${(bundleReport.totalSize / 1024 / 1024).toFixed(2)} MB\n\n`;
+            }
+            
+            report += 'Full reports available in artifacts.';
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report,
+            });

@@ -1,7 +1,8 @@
 import type { NextConfig } from 'next'
+import { PHASE_DEVELOPMENT_SERVER } from 'next/constants'
 
-const nextConfig: NextConfig = {
+export default (phase: string): NextConfig => ({
   reactStrictMode: true, // Enable strict mode for better development experience
-}
-
-export default nextConfig
+  assetPrefix:
+    phase === PHASE_DEVELOPMENT_SERVER ? undefined : '/examples/model0-clone',
+})

@@ -107,18 +107,35 @@ Follow the prompts to:
 
 ## Project Structure
 
+For a detailed guide to the monorepo architecture, see [ARCHITECTURE.md](./ARCHITECTURE.md).
+
 ```
 model0-sdk/
 ├── .changeset/          # Changesets configuration
-├── .github/             # GitHub Actions workflows
-├── packages/
-│   └── model0-sdk/         # Main TypeScript SDK package
-│       ├── src/        # Source code
-│       ├── tests/      # Test files
-│       └── dist/       # Built output
-├── package.json        # Root package configuration
-├── turbo.json         # Turborepo configuration
-└── pnpm-workspace.yaml # pnpm workspace configuration
+├── .github/
+│   └── workflows/       # GitHub Actions automation
+│       ├── ci.yml       # Build, test, lint on PR
+│       ├── coverage.yml # Test coverage reporting
+│       ├── deploy.yml   # Automatic Vercel deployment
+│       └── ...
+├── packages/            # Core libraries (published to npm)
+│   ├── model0-sdk/
+│   ├── react/
+│   └── ai-tools/
+├── apps/                # Applications (deployed to Vercel)
+│   └── playground/
+├── examples/            # Reference implementations
+│   ├── simple/
+│   ├── react-example/
+│   └── ...
+├── scripts/             # Build utilities
+├── package.json         # Root package configuration
+├── turbo.json          # Turborepo configuration
+├── tsconfig.json       # TypeScript root config
+├── ARCHITECTURE.md     # Monorepo architecture guide
+├── DEPLOYMENT.md       # Vercel deployment guide
+├── TESTING.md          # Testing strategy and examples
+└── README.md
 ```
 
 ## Available Scripts
@@ -151,13 +168,69 @@ pnpm --filter model0-sdk test
 pnpm --filter model0-sdk build
 ```
 
+## Monorepo Basics
+
+### Understanding Workspaces
+
+This is a monorepo with multiple packages managed by pnpm workspaces:
+
+- **Packages** (`packages/*`): Published to npm, used by other packages
+- **Apps** (`apps/*`): Standalone applications, deployed to Vercel
+- **Examples** (`examples/*`): Reference implementations, also deployed to Vercel
+
+### Running Commands in Specific Packages
+
+```bash
+# Run test for a specific package
+pnpm --filter=@model0-sdk/model0-sdk test
+
+# Build just one package
+pnpm --filter=@model0-sdk/react build
+
+# Run dev server for playground app
+pnpm --filter=playground dev
+
+# Run command across multiple packages
+pnpm --filter="./packages/*" test
+```
+
+### Workspace Dependencies
+
+When adding dependencies between packages, use the workspace protocol:
+
+```json
+{
+  "dependencies": {
+    "@model0-sdk/model0-sdk": "workspace:*"
+  }
+}
+```
+
+This ensures internal packages are always symlinked.
+
 ## Testing
+
+For comprehensive testing guide, see [TESTING.md](./TESTING.md).
 
 We use [Vitest](https://vitest.dev/) for testing. Tests are located in the `tests/` directory within each package.
 
+**Requirements**:
+
 - Write tests for new features
 - Update tests when modifying existing functionality
-- Ensure all tests pass before submitting a PR
+- Minimum 60% code coverage
+- All tests must pass before merge
+- Run `pnpm test` locally before pushing
+
+**Coverage**:
+
+```bash
+# Run tests with coverage report
+pnpm test -- --coverage
+
+# View HTML coverage report
+open packages/*/coverage/index.html
+```
 
 ## Code Style
 

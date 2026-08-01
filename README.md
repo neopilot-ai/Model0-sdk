@@ -135,14 +135,50 @@ This project uses [Changesets](https://github.com/changesets/changesets) for aut
 
 ### CI/CD
 
-The project includes GitHub Actions workflows:
+The project includes comprehensive GitHub Actions workflows:
 
-- **CI Pipeline** (`ci.yml`): Runs on every push and PR to main
-  - Builds all packages
-  - Runs linting, formatting, and type checking
+**Continuous Integration** (runs on all PRs and pushes to main):
+
+- **CI Pipeline** (`ci.yml`): Build, test, lint, format check
+  - Builds all packages with bundle size analysis
   - Runs tests on Node.js 20 and 22
+  - Reports build timing and performance metrics
+  - Uploads bundle reports as artifacts
 
-- **Release Pipeline** (`release.yml`): Automated releases
+- **Coverage** (`coverage.yml`): Test coverage tracking
+  - Generates coverage reports with LCOV format
+  - Merges coverage from all packages
+  - Comments coverage summary on PRs
+  - Tracks coverage trends over time
+
+- **Bundle Size** (`bundle-size.yml`): Bundle analysis
+  - Analyzes all build output directories
+  - Comments size breakdown on PRs
+  - Compares with previous builds
+  - Detects regressions
+
+- **Security Audit** (`security-audit.yml`): Dependency security
+  - Runs `pnpm audit` to check for vulnerabilities
+  - Detects outdated packages
+  - Weekly scheduled runs
+  - Reports findings on PRs
+
+- **Performance** (`performance.yml`): Build and Lighthouse monitoring
+  - Measures build time per package
+  - Tracks cache hit rates
+  - Generates performance reports
+  - Comments metrics on PRs
+
+**Deployment** (runs on successful main builds):
+
+- **Deploy** (`deploy.yml`): Automated Vercel deployment
+  - Deploys all apps to Vercel automatically
+  - Creates deployment status checks
+  - Links preview URLs in comments
+
+**Scheduled**:
+
+- **Release Pipeline** (`release.yml`): Automated npm publishing
   - Creates "Version Packages" PRs when changesets are added
   - Publishes packages to npm when version PRs are merged
 
@@ -154,6 +190,16 @@ The project includes GitHub Actions workflows:
   - Runs daily to check for OpenAPI spec updates
   - Can be triggered manually
   - Creates PRs when the SDK needs updates
+
+### Documentation
+
+Comprehensive guides for contributors and users:
+
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Monorepo structure, workspace dependencies, and design
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)**: Vercel deployment, environment setup, troubleshooting
+- **[TESTING.md](./TESTING.md)**: Test strategy, coverage requirements, writing tests
+- **[docs/PERFORMANCE.md](./docs/PERFORMANCE.md)**: Performance optimization, caching, monitoring
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)**: Developer workflow, code standards, release process
 
 ## Resources
 
